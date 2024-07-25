@@ -15,7 +15,6 @@ async function init(env: string) {
   } catch (error) {
     logger.error("Failed authentication: " + error)
   }
-  
 
   if (env == "development"){
     const {Room, Order, Borrower} = await modelsInit(sequelize);
@@ -26,6 +25,13 @@ async function init(env: string) {
       name: "Ruang Teater, Multimedia",
       majorOwner: "Administrator",
       isLabkom: false
+    };
+
+    const borrowerData = {
+      id: 1,
+      name: 'Zein Aroddi Abdilah',
+      email: 'englishClub@gmail.com',
+      isStudent: true
     };
 
     const orderData = {
@@ -40,19 +46,8 @@ async function init(env: string) {
       returnDate: null
     };
 
-    const borrowerData = {
-      id: 1,
-      name: 'Zein Aroddi Abdilah',
-      email: 'englishClub@gmail.com',
-      isStudent: true
-    };
-
     await Room.create(
       roomData
-    );
-
-    await Order.create(
-      orderData
     );
 
     await Borrower.create(

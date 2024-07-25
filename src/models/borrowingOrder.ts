@@ -25,7 +25,7 @@ export default (async (sequelize: Sequelize) => {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: "borrowers",
+                model: "Borrower",
                 key: 'id',
             }
         },
@@ -34,7 +34,7 @@ export default (async (sequelize: Sequelize) => {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: "rooms",
+                model: "Room",
                 key: 'id',
             }
         },
