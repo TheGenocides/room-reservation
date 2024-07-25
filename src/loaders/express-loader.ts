@@ -19,7 +19,7 @@ const corsOption: CorsOptions = {
 export default function defaultLoader(app: Application) {
     return (async (app: Application) => {
         
-        app.get("/", (req: Request, res: Response, next: NextFunction) => {
+        app.get("/", (req: Request, res: Response) => {
             res.send("Default home page")
         });
 
@@ -28,16 +28,7 @@ export default function defaultLoader(app: Application) {
         app.use((req: Request, res: Response) => {
             return Respond.NOT_FOUND(res, "URI Not exist", null);
         });
-
-        app.use((err: any, req: Request, res: Response, next: NextFunction) => {
-            if (!fs.existsSync("/log")) {
-                fs.mkdirSync("/log", { recursive: true });
-            }
-            if (res.headersSent) {
-                return next(err);
-            }
-            Respond.INTERNAL_ERR(res, null, null);
-        });
+        
         return app;
     })(app);
 }

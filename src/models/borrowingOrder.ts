@@ -1,33 +1,20 @@
-NODE_ENV=production
-ORIGIN=http://yoursite.com
-DB_PATH=
-PORT=3002
+import { Model, DataTypes, Sequelize } from "sequelize"
 
-const Room = sequelize.define("room", {
-    id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        allowNull: false,
-      },
+class borrowingOrder extends Model implements IborrowingOrder{
+    id!: number
+    borrowerId!: number
+    roomId!: number
+    note!: string
+    borrowDate!: Date | null
+    returnDate!: Date | null
+    dueDate!: Date
+    isExpired!: boolean
+    status!: borrowingStatus
+}
 
-    name: {
-        type: DataTypes.TEXT,
-        allowNull: false,
-      },
 
-    majorOwner: {
-        type: DataTypes.TEXT,
-        allowNull: false,
-      },
-
-    isLabkom: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-      }
-    }, {timestamps: false, freezeTableName: true}
-  )
-
-  const borrowingOrder = sequelize.define("order", {
+export default (async (sequelize: Sequelize) => {
+    return borrowingOrder.init({
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
@@ -72,15 +59,19 @@ const Room = sequelize.define("room", {
             type: DataTypes.DATE,
             allowNull: true,
         },
-    
+
         isExpired: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
+            defaultValue: false,
+        },
+        
+        status: {
+            type: DataTypes.ENUM("IN_PROGRESS", "BORROWING", "EXPIRED", "DONE"),
+            allowNull: true,
             defaultValue: "IN_PROGRESS",
-            validate: {
-                isIn: [["IN_PROGRESS", "BORROWING", "EXPIRED", "DONE"]]
-            }
         }
     
     
-    }, {freezeTableName: true});
+    }, {sequelize, tableName: "orders"});
+})

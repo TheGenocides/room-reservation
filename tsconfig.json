@@ -14,6 +14,7 @@
             "#events/*" : ["src/events/*"],
             "#config/*": ["src/config/*"],
             "#loaders/*": ["src/loaders/*"],
+            "#databases/*": ["src/databases/*"]
         },
         "rootDir": "src",
         "outDir": "dist",

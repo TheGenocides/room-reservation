@@ -14,12 +14,12 @@
   "imports": {
     "#models/*": "./src/models/*.ts",
     "#routes/*": "./src/routes/*.ts",
-    "#controllers/*": "./src/controllers/*.ts",
     "#utils/*": "./src/utils/*.ts",
     "#class/*": "./src/class/*.ts",
     "#events/*": "./src/events/*.ts",
     "#config/*": "./src/config/*.ts",
-    "#loaders/*": "./src/loaders/*.ts"
+    "#loaders/*": "./src/loaders/*.ts",
+    "#databases/*": "./src/databases/*.ts"
   },
   "author": "",
   "license": "ISC",
@@ -28,15 +28,16 @@
     "@types/cors": "^2.8.14",
     "@types/express": "^4.17.19",
     "@types/mocha": "^10.0.2",
-    "@types/node": "^20.8.6",
+    "@types/node": "^20.14.11",
+    "@types/sequelize": "^4.28.20",
     "chai": "^4.3.10",
     "mocha": "^10.2.0",
     "nodemon": "^3.0.1",
     "nyc": "^15.1.0",
     "ts-mocha": "^10.0.0",
-    "ts-node": "^10.9.1",
+    "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
-    "typescript": "^5.2.2"
+    "typescript": "^5.5.4"
   },
   "dependencies": {
     "body-parser": "^1.20.2",
@@ -50,6 +51,9 @@
     "pino": "^8.16.1",
     "pino-pretty": "^10.2.3",
     "pm2": "^5.3.0",
+    "sequelize": "^6.37.3",
+    "sequelize-cli": "^6.6.2",
+    "sqlite3": "^5.1.7",
     "tiny-typed-emitter": "^2.1.0"
   }
 }

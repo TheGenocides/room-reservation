@@ -10,3 +10,5 @@ dist/*
 
 .nyc_output
 .nyc_output/*
+
+./src/databases/*
