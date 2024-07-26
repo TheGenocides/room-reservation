@@ -4,8 +4,8 @@ import borrowerInit from "#models/borrower";
 
 export default async () => {
     return {
-        Room: (await roomInit()), 
-        Borrower: (await borrowerInit()),
-        Order: (await borrowingOrderInit()),
+        Room: (roomInit()), 
+        Borrower: (borrowerInit()),
+        Order: (borrowingOrderInit()),
     };
 }

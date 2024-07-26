@@ -8,7 +8,7 @@ class Room extends Model implements IRoom{
     isLabkom!: boolean
 }
 
-export default (async () =>{
+export default () =>{
     return Room.init({
       id: {
           type: DataTypes.INTEGER,
@@ -32,4 +32,4 @@ export default (async () =>{
         }
       }, {sequelize, tableName: "rooms", timestamps: false, freezeTableName: true}
     )
-})
+}

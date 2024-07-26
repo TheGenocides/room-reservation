@@ -9,7 +9,7 @@ class Borrower extends Model implements IBorrower{
     type!: borrowerType
 }
 
-export default (async () => {
+export default () => {
     return Borrower.init(
         {   
             id: {
@@ -36,4 +36,4 @@ export default (async () => {
                 }
         }, {sequelize, timestamps: false, tableName: "borrowers"}
     );
-})
+}

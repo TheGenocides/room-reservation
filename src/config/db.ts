@@ -1,4 +1,4 @@
-import { DataTypes, Sequelize } from 'sequelize';
+import { Sequelize } from 'sequelize';
 import { logger } from '#utils/Logger';
 import env from "#config/index";
 import modelsInit from "#models/index"
@@ -18,6 +18,7 @@ async function init(env: string) {
 
   if (env == "development"){
     const {Room, Order, Borrower} = await modelsInit();
+
     Room.hasMany(Order, { foreignKey: 'roomId', as: "orders" });
     Order.belongsTo(Room, { foreignKey: 'roomId' , as: "room" });
 

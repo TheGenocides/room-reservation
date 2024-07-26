@@ -14,7 +14,7 @@ class borrowingOrder extends Model implements IborrowingOrder{
 }
 
 
-export default (async () => {
+export default () => {
     return borrowingOrder.init({
         id: {
             type: DataTypes.INTEGER,
@@ -75,5 +75,4 @@ export default (async () => {
     
     
     }, {sequelize, tableName: "orders"}
-);
-})
+)}
