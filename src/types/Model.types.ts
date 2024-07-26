@@ -2,6 +2,7 @@ type headMajor = "Informatika" | "DKV" | "Bangunan" | "TITL" | "Mesin"
 type Major = "SIJA" | "RPL" | "TKJ"
 type borrowingStatus = "IN_PROGRESS" | "BORROWED" | "EXPIRED" | "RETURNED"
 type roomOwner = Major | "Administrator"
+type borrowerType = "student" | "teacher" | "other"
 
 interface IRoom {
     id: number;
@@ -14,10 +15,10 @@ interface IBorrower {
     id: number;
     name: string;
     email: string;
-    isStudent: boolean;
+    type: borrowerType
 }
 
-interface IStudent extends IBorrower {
+interface IStudent {
     NISN: number;
     headMajor: headMajor;
     major: Major;

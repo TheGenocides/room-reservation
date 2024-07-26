@@ -1,4 +1,5 @@
 import { Model, DataTypes, Sequelize } from "sequelize"
+import { sequelize } from "#config/db"
 
 class borrowingOrder extends Model implements IborrowingOrder{
     id!: number
@@ -13,7 +14,7 @@ class borrowingOrder extends Model implements IborrowingOrder{
 }
 
 
-export default (async (sequelize: Sequelize) => {
+export default (async () => {
     return borrowingOrder.init({
         id: {
             type: DataTypes.INTEGER,
@@ -25,7 +26,7 @@ export default (async (sequelize: Sequelize) => {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: "Borrower",
+                model: "borrowers",
                 key: 'id',
             }
         },
@@ -34,7 +35,7 @@ export default (async (sequelize: Sequelize) => {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: "Room",
+                model: "rooms",
                 key: 'id',
             }
         },
@@ -73,5 +74,6 @@ export default (async (sequelize: Sequelize) => {
         }
     
     
-    }, {sequelize, tableName: "orders"});
+    }, {sequelize, tableName: "orders"}
+);
 })

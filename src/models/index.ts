@@ -1,12 +1,11 @@
-import { Sequelize } from "sequelize";
 import roomInit from "#models/room";
-import borrowingOrderInit from "#models/borrowingOrder";
+import borrowingOrderInit from "#models/order";
 import borrowerInit from "#models/borrower";
 
-export default async (sequelize: Sequelize) => {
+export default async () => {
     return {
-        Room: (await roomInit(sequelize)), 
-        Borrower: (await borrowerInit(sequelize)),
-        Order: (await borrowingOrderInit(sequelize)),
+        Room: (await roomInit()), 
+        Borrower: (await borrowerInit()),
+        Order: (await borrowingOrderInit()),
     };
 }

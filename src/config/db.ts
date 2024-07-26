@@ -5,7 +5,7 @@ import modelsInit from "#models/index"
 
 const sequelize = new Sequelize({
   dialect: 'sqlite',
-  storage: `${env.DB_PATH}/db.sqlite3`,
+  storage: `${env.DB_PATH || "src/databases"}/db.sqlite3`,
 });
 
 async function init(env: string) {
@@ -17,7 +17,13 @@ async function init(env: string) {
   }
 
   if (env == "development"){
-    const {Room, Order, Borrower} = await modelsInit(sequelize);
+    const {Room, Order, Borrower} = await modelsInit();
+    Room.hasMany(Order, { foreignKey: 'roomId', as: "orders" });
+    Order.belongsTo(Room, { foreignKey: 'roomId' , as: "room" });
+
+    Borrower.hasMany(Order, { foreignKey: "borrowerId", as: "orders" })
+    Order.belongsTo(Borrower, { foreignKey: 'borrowerId', as: "borrower" });
+
     await sequelize.sync({force: true});
 
     const roomData = {
@@ -31,7 +37,7 @@ async function init(env: string) {
       id: 1,
       name: 'Zein Aroddi Abdilah',
       email: 'englishClub@gmail.com',
-      isStudent: true
+      type: "student"
     };
 
     const orderData = {
@@ -52,15 +58,18 @@ async function init(env: string) {
 
     await Borrower.create(
       borrowerData
-    )
+    );
     
+    await Order.create(
+      orderData
+    );
+
+    const result = (
+      await Order.findOne())?.toJSON();
+    logger.info(result);
   } else {
-    await sequelize.sync()
+    await sequelize.sync();
   }
-
- 
-
-  logger.info("Database Synced!")
 }
 
 export {init, sequelize};
