@@ -1,4 +1,4 @@
-import { Model, DataTypes, Sequelize } from "sequelize"
+import { Model, DataTypes, Sequelize, Optional } from "sequelize"
 import { sequelize } from "#config/db"
 
 class Borrower extends Model implements IBorrower{
