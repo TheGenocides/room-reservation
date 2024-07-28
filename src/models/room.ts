@@ -8,28 +8,30 @@ class Room extends Model implements IRoom{
     isLabkom!: boolean
 }
 
-export default () =>{
-    return Room.init({
-      id: {
-          type: DataTypes.INTEGER,
-          primaryKey: true,
-          allowNull: false,
-        },
-  
-      name: {
-          type: DataTypes.TEXT,
-          allowNull: false,
-        },
-  
-      majorOwner: {
-          type: DataTypes.TEXT,
-          allowNull: false,
-        },
-  
-      isLabkom: {
-          type: DataTypes.BOOLEAN,
-          allowNull: false,
-        }
-      }, {sequelize, tableName: "rooms", timestamps: false, freezeTableName: true}
-    )
+function roomInit(){
+  return Room.init({
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        allowNull: false,
+      },
+
+    name: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+      },
+
+    majorOwner: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+      },
+
+    isLabkom: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+      }
+    }, {sequelize, tableName: "rooms", timestamps: false, freezeTableName: true}
+  )
 }
+
+export {roomInit, Room}

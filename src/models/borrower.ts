@@ -1,5 +1,6 @@
-import { Model, DataTypes, Sequelize, Optional } from "sequelize"
+import { DataTypes } from "sequelize"
 import { sequelize } from "#config/db"
+import Model from "./Model"
 
 class Borrower extends Model implements IBorrower{
     id!: number
@@ -9,7 +10,7 @@ class Borrower extends Model implements IBorrower{
     type!: borrowerType
 }
 
-export default () => {
+function borrowerInit(){
     return Borrower.init(
         {   
             id: {
@@ -37,3 +38,5 @@ export default () => {
         }, {sequelize, timestamps: false, tableName: "borrowers"}
     );
 }
+
+export {borrowerInit, Borrower}

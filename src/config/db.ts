@@ -1,7 +1,7 @@
 import { Sequelize } from 'sequelize';
 import { logger } from '#utils/Logger';
 import env from "#config/index";
-import modelsInit from "#models/index"
+import { modelsInit } from "#models/index"
 
 const sequelize = new Sequelize({
   dialect: 'sqlite',
@@ -17,7 +17,7 @@ async function init(env: string) {
   }
 
   if (env == "development"){
-    const {Room, Order, Borrower} = await modelsInit();
+    const {Room, Order, Borrower} = modelsInit();
 
     await sequelize.sync({force: true});
 
@@ -53,10 +53,11 @@ async function init(env: string) {
       borrowerData
     );
     
-    await Order.create(
+    const order = await Order.create(
       orderData
     );
 
+    logger.info(order.toJSON())
     const result = (await Order.findOne(
       {include: [
         {model: Room, as: "Room"},

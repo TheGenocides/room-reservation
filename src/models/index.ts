@@ -1,12 +1,12 @@
-import roomInit from "#models/room";
-import borrowingOrderInit from "#models/order";
-import borrowerInit from "#models/borrower";
+import { roomInit, Room } from "./Room";
+import { orderInit, Order } from "./Order";
+import { borrowerInit, Borrower } from "./Borrower";
 
-export default async () => {
+function modelsInit(){
     const {Room, Borrower, Order} = {
         Room: (roomInit()), 
         Borrower: (borrowerInit()),
-        Order: (borrowingOrderInit()),
+        Order: (orderInit()),
     };
 
     Room.hasMany(Order, { foreignKey: 'roomId', as: "Orders" });
@@ -17,3 +17,7 @@ export default async () => {
 
     return {Room, Borrower, Order};
 }
+
+const models = [Room, Order, Borrower]
+
+export {modelsInit, Room, Order, Borrower, models}

@@ -1,7 +1,8 @@
-import { Model, DataTypes, Sequelize } from "sequelize"
+import { DataTypes, IncludeOptions } from "sequelize"
 import { sequelize } from "#config/db"
+import Model from "./Model"
 
-class borrowingOrder extends Model implements IborrowingOrder{
+class Order extends Model implements IborrowingOrder{
     id!: number
     borrowerId!: number
     roomId!: number
@@ -13,9 +14,8 @@ class borrowingOrder extends Model implements IborrowingOrder{
     status!: borrowingStatus
 }
 
-
-export default () => {
-    return borrowingOrder.init({
+function orderInit(){
+    return Order.init({
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
@@ -76,3 +76,7 @@ export default () => {
     
     }, {sequelize, tableName: "orders"}
 )}
+
+export {
+    orderInit, Order
+}
